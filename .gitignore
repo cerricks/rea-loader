@@ -1,0 +1,8 @@
+/target/
+/nbproject/
+/nbactions.xml
+/nb-configuration.xml
+/bin/
+/docs/
+/logs/
+/config/rea-setup.sql
