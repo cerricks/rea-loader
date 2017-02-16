@@ -8,8 +8,8 @@
     </parent>
     
     <artifactId>rea-loader</artifactId>
-    <groupId>iconium</groupId>
-    <name>REA Property Loader</name>
+    <groupId>com.github.cerricks</groupId>
+    <name>rea-loader</name>
     <description>A utility for loading historical residential property listing data from a JSON file into a relational database.</description>
     <version>1.0</version>
     
@@ -29,6 +29,12 @@
         </license>
     </licenses>         
     
+    <scm>
+        <url>https://github.com/cerricks/rea-loader</url>
+        <connection>scm:git:git://github.com/cerricks/rea-loader.git</connection>
+        <developerConnection>scm:git:git@github.com:cerricks/rea-loader.git</developerConnection>
+    </scm>
+        
     <developers>
         <developer>
             <id>cerricks</id>
