@@ -17,6 +17,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.core.io.JsonEOFException;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 import javax.annotation.PostConstruct;
@@ -127,9 +128,19 @@ public class JsonNodeReader extends AbstractItemCountingItemStreamItemReader<Jso
             throw new ReaderNotOpenException("Reader must be open before it can be read.");
         }
 
-        if (parser.nextToken() != JsonToken.START_OBJECT) {
+        JsonToken token = null;
+
+        try {
+            token = parser.nextToken();
+        } catch (JsonEOFException ex) {
+            logger.warn(ex.getMessage());
+
+            token = null;
+        }
+
+        if (token == null) {
             if (logger.isDebugEnabled()) {
-                logger.debug("No more elements to read from array");
+                logger.debug("No more elements to read from file");
             }
 
             try {
@@ -139,6 +150,10 @@ public class JsonNodeReader extends AbstractItemCountingItemStreamItemReader<Jso
             }
 
             return null;
+        }
+
+        if (token != JsonToken.START_OBJECT) {
+            throw new JsonParseException(parser, "Unexpected token [" + token + "]", parser.getCurrentLocation());
         }
 
         return parser.readValueAsTree();
