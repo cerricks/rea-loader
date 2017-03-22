@@ -31,7 +31,7 @@ batch.skip.limit | The number of items allowed to skip/fail before job is FAILED
 ##Usage
 
 ```
-java -jar target/rea-loader-1.0.jar input.file=input.json
+java -jar target/rea-loader-1.1.jar input.file=input.json
 ```
 
 Where `input.file` is the path to the input file containing JSON content.
